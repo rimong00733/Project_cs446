@@ -11,27 +11,16 @@
 
     <title>Creative - Start Bootstrap Theme</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-    <!-- Plugin CSS -->
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
-    <!-- Theme CSS -->
     <link href="css/creative.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+    <link href="dist/sweetalert.css" rel="stylesheet">
     </head>
 
     <body style="background-color: #F0FFFF;">
@@ -43,7 +32,7 @@
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top" style="color: red">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="index.php" style="color: red">Start Bootstrap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,12 +51,12 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-  
+
   <center>
-  <div style="margin-top: 60px;">  
+  <div style="margin-top: 30%;">
       <div class="panel panel-primary" style="width: 90%;">
       <div class="panel-body">
-          
+
           <form id="formadd">
           <div class="form-group" align="left">
           <label>Username</label>
@@ -90,9 +79,9 @@
             </select>
           </div>
           <!--</div>-->
-          <div class="form-group" align="left" style="width: 20%;">
-          <label>Age</label>
-            <input type="text" class="form-control" placeholder="อายุ" id="age" name="age">
+          <div class="form-group" align="left" style="width: 58%;">
+          <label>Birthday</label>
+            <input type="date" class="form-control" placeholder="อายุ" id="age" name="age">
           </div>
           <div class="form-group" align="left">
           <label>EmailAddress</label>
@@ -102,19 +91,19 @@
           <input type="submit" style="width: 100%;">
           </div>
           <div class="form-group">
-          <p id="checkadd"></p>    
+          <p id="checkadd"></p>
           </div>
           </form>
-      
+
       </div>
       </div>
-  </div>     
+  </div>
   </center>
 
   </div>
   <div class="col-md-4"></div>
 </div>
-    
+
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -129,6 +118,8 @@
 
     <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
+    <script src="dist/sweetalert-dev.js"></script>
+    <script src="dist/sweetalert.min.js" charset="utf-8"></script>
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -150,7 +141,21 @@
                                 $('#gender').val("");
                                 $('#age').val("");
                                 $('#email').val("");
-                                $('#checkadd').html(result);
+                                swal({
+                                  title: "Success",
+                                  text: "ยืนยันการทำรายการเสร็จสิ้น",
+                                  type: "success",
+                                  confirmButtonColor: "#56E462",
+                                  confirmButtonText: "OK",
+                                  closeOnConfirm: false
+                                },
+                                function(isConfirm){
+                                  if (isConfirm) {
+                                      window.location.assign("login.php");
+                                  } else {
+                                      window.location.assign("login.php");
+                                  }
+                                });
                             }
                         });
                         return false;

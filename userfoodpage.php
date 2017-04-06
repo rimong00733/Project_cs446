@@ -27,7 +27,7 @@ session_start();
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top" style="color: red;">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="userpage1.php" style="color: red;">Start Bootstrap</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -42,7 +42,7 @@ session_start();
                      </div>
                     </li>
                     <li>
-                        <a class="page-scroll" href="userfoodpage.php" style="color: red;">FOOD</a>
+                        <a class="page-scroll" href="#serviceformember.php" style="color: red;">FOOD</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="diary1.php" style="color: red;">Diary</a>
@@ -58,7 +58,39 @@ session_start();
         </div>
     </nav>
 
-
+    <div style="margin-top: 5%;">
+      <?php
+       require("connectdb.php");
+       $sql = "SELECT * FROM categories";
+       $result = $conn->query($sql);
+       if ($result->num_rows > 0) {
+              			echo "
+                    <div class='table-title'>
+                    <h3>category of foods</h3>
+                    </div>
+                    <table class='table-fill'>
+                    <thead>
+                    </thead>
+                    <tbody class='table-hover'>
+                    ";
+              			while($row = $result->fetch_assoc()) {
+              					echo "<tr>
+  											<td class='text-left'>" .$row["categories_name"]. "</td>
+                        <td class='text-left'>
+                        <form action='userfoodpage2.php' method='POST'>
+                        <input type='hidden' value='".$row["categories_id"]."' name='id'>
+                        <button type='submit' class='btn btn-success' style='margin-left:40%'><span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span></button>
+                        </form>
+                        </td>
+              					</tr>";
+              		}
+              		echo "
+                        </tbody>
+                        </table>
+                        ";
+              	}
+      ?>
+    </div>
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>

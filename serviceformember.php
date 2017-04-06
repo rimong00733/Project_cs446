@@ -27,7 +27,7 @@ session_start();
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top" style="color: red;">Start Bootstrap</a>
+                <a class="navbar-brand page-scroll" href="userpage1.php" style="color: red;">Start Bootstrap</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -48,7 +48,7 @@ session_start();
                         <a class="page-scroll" href="diary1.php" style="color: red;">Diary</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="serviceformember.php" style="color: red;">service</a>
+                        <a class="page-scroll" href="#serviceformember.php" style="color: red;">service</a>
                     </li>
                     <li>
                         <a class="page-scroll" style="color: red;"><button id="logout">LOGOUT</button></a>
@@ -57,9 +57,40 @@ session_start();
             </div>
         </div>
     </nav>
+    <!--body-->
+
+
+    <div class="container">
+      <div class="col-md-offset-4 col-md-4" style="margin-top : 10%;">
+        <div class="panel panel-primary">
+          <div class="panel-heading"><h4>Fitness support</h4></div>
+          <div class="panel-body">
+            <?php
+                  require("connectdb.php");
+                  $sql = "SELECT * FROM login where MemberID = '".$_SESSION["Member_id"]."'";
+                  $result = $conn->query($sql);
+                  if ($result->num_rows > 0) {
+  	              while($row = $result->fetch_assoc()) {
+ 		              echo "
+                        <center>
+                        <br>
+                        <img src='img/barcode/".$row['barcode']."'><br><br>
+                        </center>
+                        <label style='margin-left: 19%;'>MemberID : </label> ".$row['MemberID']." <br>
+                        <label style='margin-left: 19%;'>Name : </label> ".$row['name']." <br>
+                        <label style='margin-left: 19%;'>Email : </label> ".$row['email']." <br>
+
+                       ";
+                  }}
+           ?>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 
+    <!--end body-->
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

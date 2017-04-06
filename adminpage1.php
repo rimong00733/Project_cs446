@@ -1,8 +1,6 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,10 +17,12 @@ session_start();
     <link href="dist/sweetalert.css" rel="stylesheet">
     <link href="css/table.css" rel="stylesheet">
 </head>
+
 <body id="page-top">
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
@@ -32,23 +32,10 @@ session_start();
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <div class="dropdown">
-                       <button class="btn btn-default" data-toggle="dropdown" style="margin-top:8%; color:red;">Programs
-                       <span class="caret"></span></button>
-                       <ul class="dropdown-menu">
-                         <li><a href="calculators.php">BMI (ดัชนีมวลกาย)</a></li>
-                         <li><a href="calculators2.php">BMR (อัตราการเผาผลาญ)</a></li>
-                       </ul>
-                     </div>
+                        <a class="page-scroll" href="admininsert.php" style="color: red;">insert</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="userfoodpage.php" style="color: red;">FOOD</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="diary1.php" style="color: red;">Diary</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="serviceformember.php" style="color: red;">service</a>
+                        <a class="page-scroll" href="service1.php" style="color: red;">services</a>
                     </li>
                     <li>
                         <a class="page-scroll" style="color: red;"><button id="logout">LOGOUT</button></a>
@@ -59,16 +46,59 @@ session_start();
     </nav>
 
 
+    <div style="margin-top: 5%;">
+      <?php
+       require("connectdb.php");
+       $sql = "SELECT * FROM categories";
+       $result = $conn->query($sql);
+       if ($result->num_rows > 0) {
+              			echo "
+                    <div class='table-title'>
+                    <h3>category of foods</h3>
+                    </div>
+                    <table class='table-fill'>
+                    <thead>
+                    </thead>
+                    <tbody class='table-hover'>
+                    ";
+              			while($row = $result->fetch_assoc()) {
+              					echo "<tr>
+  											<td class='text-left'>" .$row["categories_name"]. "</td>
+                        <td class='text-left'>
+                        <form action='adminpage2.php' method='POST'>
+                        <input type='hidden' value='".$row["categories_id"]."' name='id'>
+                        <button type='submit' class='btn btn-success' style='margin-left:40%'><span class='glyphicon glyphicon-th-list' aria-hidden='true'></span></button>
+                        </form>
+                        </td>
+              					</tr>";
+              		}
+              		echo "
+                        </tbody>
+                        </table>
+                        ";
+              	}
+      ?>
+    </div>
+
+
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Theme JavaScript -->
     <script src="js/creative.min.js"></script>
+
     <script src="dist/sweetalert-dev.js"></script>
     <script src="dist/sweetalert.min.js" charset="utf-8"></script>
+
     <script type="text/javascript">
         $('#logout').click(function(){
             swal({
@@ -86,4 +116,5 @@ session_start();
         });
     </script>
 </body>
+
 </html>
